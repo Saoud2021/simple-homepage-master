@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="resources/favicon.ico"
+      type="image/x-icon"
+      sizes="96x96"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Simple Homepage - Alarado | devChallenges.io</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="/" class="logo">
+          <img
+            src="./resources/logo-light.svg"
+            alt="Alarado Logo"
+            id="logo-icon"
+          />
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#" class="nav-link">About us</a></li>
+            <li><a href="#" class="nav-link">Product</a></li>
+            <li><a href="#" class="nav-link">Resource</a></li>
+            <li><a href="#" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="user-actions">
+          <div class="icon-wrapper moon-icon" id="moonWrapper">
+            <img src="./resources/Moon_fill_light.svg" id="moonIcon" />
+          </div>
+          <div class="icon-wrapper sun-icon" id="sunWrapper">
+            <img src="./resources/Sun_fill.svg" id="sunIcon" />
+          </div>
+        </div>
+      </header>
+      <section>
+        <div class="intro-content">
+          <p class="tagline">😎 SIMPLE WAY TO COMMUNICATE</p>
+          <h1>
+            Actions for <br />
+            Accessibility <br />in Design
+          </h1>
+          <p>
+            The fastest way to build and deploy websites with resusable
+            components.
+          </p>
+          <div class="cta-buttons">
+            <a href="#" class="button primary-button">GET STARTED</a>
+            <a href="#" class="button secondary-button">Get live demo</a>
+          </div>
+          <ul class="feature-checklist">
+            <li>No credit card required</li>
+            <li>No software to install</li>
+          </ul>
+        </div>
+        <div class="visual-showcase">
+          <img
+            src="./resources/hero-image-simple-homepage.png"
+            alt="3D illustration of a person working on a laptop with abstract elements"
+          />
+        </div>
+      </section>
+
+      <div class="author-info">
+        Coded by
+        <a href="https://www.linkedin.com/in/abdallahsaoud/"
+          >Abdallah aboelsaoud</a
+        >
+        | Challenge by
+        <a href="https://www.devchallenges.io?ref=challenge" target="_blank"
+          >devChallenges.io</a
+        >.
+      </div>
+    </div>
+    <script>
+      const sunToggle = document.getElementById("sunWrapper");
+      const moonWrapper = document.getElementById("moonWrapper");
+      const moonIcon = document.getElementById("moonIcon");
+      const sunIcon = document.getElementById("sunIcon");
+      const logoIcon = document.getElementById("logo-icon");
+      const body = document.body;
+
+      let isDark = false;
+
+      // Wrap the toggle logic in a reusable function
+      function toggleDarkMode() {
+        isDark = !isDark;
+
+        // Toggle classes and images
+        moonWrapper.classList.toggle("active-moon");
+        sunToggle.classList.toggle("sun-icon");
+
+        moonIcon.src = isDark
+          ? "./resources/Moon_fill.svg"
+          : "./resources/Moon_fill_light.svg";
+
+        sunIcon.src = !isDark
+          ? "./resources/Sun_fill.svg"
+          : "./resources/Sun_fill_light.svg";
+
+        logoIcon.src = isDark
+          ? "./resources/logo-dark.svg"
+          : "./resources/logo-light.svg";
+
+        // Use data attribute instead of class for theme switching
+        if (isDark) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      }
+
+      // Add the same function to both icons
+      sunToggle.addEventListener("click", toggleDarkMode);
+      moonWrapper.addEventListener("click", toggleDarkMode);
+    </script>
+  </body>
+</html>
