@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -29,6 +29,8 @@
             id="logo-icon"
           />
         </a>
+        <!-- Desktop Navigation -->
+
         <nav class="main-nav">
           <ul>
             <li><a href="#" class="nav-link">About us</a></li>
@@ -37,13 +39,33 @@
             <li><a href="#" class="nav-link">Contact</a></li>
           </ul>
         </nav>
-        <div class="user-actions">
-          <div class="icon-wrapper moon-icon" id="moonWrapper">
-            <img src="./resources/Moon_fill_light.svg" id="moonIcon" />
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+        <nav class="mobile-nav" id="mobileNav">
+          <ul>
+            <li><a href="#" class="nav-link">About us</a></li>
+            <li><a href="#" class="nav-link">Product</a></li>
+            <li><a href="#" class="nav-link">Resource</a></li>
+            <li><a href="#" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <!-- Right side controls -->
+        <div style="display: flex; align-items: center; gap: 15px">
+          <!-- Theme Toggle -->
+          <div class="user-actions">
+            <div class="icon-wrapper moon-icon" id="moonWrapper">
+              <img src="./resources/Moon_fill_light.svg" id="moonIcon" />
+            </div>
+            <div class="icon-wrapper sun-icon" id="sunWrapper">
+              <img src="./resources/Sun_fill.svg" id="sunIcon" />
+            </div>
           </div>
-          <div class="icon-wrapper sun-icon" id="sunWrapper">
-            <img src="./resources/Sun_fill.svg" id="sunIcon" />
-          </div>
+          <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </header>
       <section>
@@ -92,6 +114,9 @@
       const sunIcon = document.getElementById("sunIcon");
       const logoIcon = document.getElementById("logo-icon");
       const body = document.body;
+      const hamburger = document.getElementById("hamburger");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileNavOverlay = document.getElementById("mobileNavOverlay");
 
       let isDark = false;
 
@@ -122,10 +147,39 @@
           document.documentElement.removeAttribute("data-theme");
         }
       }
+  // Mobile menu toggle function
+  function toggleMobileMenu() {
+        hamburger.classList.toggle("active");
+        mobileNav.classList.toggle("active");
+        mobileNavOverlay.classList.toggle("active");
+        body.style.overflow = mobileNav.classList.contains("active") ? "hidden" : "";
+      }
 
-      // Add the same function to both icons
+      // Close mobile menu
+      function closeMobileMenu() {
+        hamburger.classList.remove("active");
+        mobileNav.classList.remove("active");
+        mobileNavOverlay.classList.remove("active");
+        body.style.overflow = "";
+      }
+
+      // Event listeners
       sunToggle.addEventListener("click", toggleDarkMode);
       moonWrapper.addEventListener("click", toggleDarkMode);
-    </script>
+      hamburger.addEventListener("click", toggleMobileMenu);
+      mobileNavOverlay.addEventListener("click", closeMobileMenu);
+
+      // Close mobile menu when clicking on nav links
+      const mobileNavLinks = mobileNav.querySelectorAll('.nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      // Close mobile menu on window resize if open
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          closeMobileMenu();
+        }
+      });</script>
   </body>
 </html>
